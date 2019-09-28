@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="Olympics"
 run/main_scene="res://MainMenu/TitleScreen.tscn"
-config/icon="res://icon.png"
+config/icon="res://Assets/icon.png"
 
 [rendering]
 
