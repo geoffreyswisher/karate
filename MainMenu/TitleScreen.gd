@@ -12,5 +12,5 @@ func _ready():
 
 func _on_Button_pressed(scene_to_load):
 	#for the packed scene export, we need to use a function that has packed scene parameter
-	get_tree().change_scene(scene_to_load)
+	get_tree().change_scene_to(scene_to_load)
 

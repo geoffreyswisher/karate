@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Fonts/MontserrantItalic_64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://MainMenu/Buttons/BackButton.tscn" type="PackedScene" id=2]
 
 [node name="NewGameScreen" type="Control"]
 anchor_right = 1.0
@@ -20,3 +21,7 @@ custom_colors/font_color_shadow = Color( 1, 0.584314, 0, 1 )
 custom_constants/shadow_offset_y = 6
 text = "New Game"
 align = 1
+
+[node name="BackButton" parent="VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 83.0
+margin_bottom = 143.0
