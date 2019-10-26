@@ -3,8 +3,9 @@ extends Node
 var targetpos = Vector2(0,0)
 
 func _ready():
-	
 	targetpos = get_node("../Target").get_position()
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 #--------------------------------------------------------------------------------
 
@@ -12,7 +13,7 @@ var gamescore = 0
 
 var arrowcounter = 0
 
-const Arrow = preload("res://Archery/Arrow.tscn")
+const Arrow = preload("res://Archery/Items/Arrow.tscn")
 
 func _input(event):
 	
@@ -22,9 +23,10 @@ func _input(event):
 		ArrowInstance.name = 'Arrow' + str(arrowcounter)
 		
 		get_node("../Arrows").add_child(ArrowInstance)
-		get_node('../Arrows/Arrow' + str(arrowcounter)).set_position(event.position)
+		var pos = get_node('../Cursor').posofarrow(event.position)
+		get_node('../Arrows/Arrow' + str(arrowcounter)).set_position(pos)
 		
-		checkposition(event.position)
+		checkposition(pos)
 		
 		arrowcounter += 1
 
