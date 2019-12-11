@@ -7,4 +7,4 @@ func _on_BackButton_pressed():
 
 
 func _on_PlayButton_pressed():
-	get_tree().change_scene("res://Archery/Game.tscn")
+	get_tree().change_scene("res://Game/MainScene.tscn")
