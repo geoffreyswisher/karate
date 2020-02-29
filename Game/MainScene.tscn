@@ -1,51 +1,58 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game/Player1.gd" type="Script" id=1]
-[ext_resource path="res://Assets/icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Health_Bar/empty_health_bar.png" type="Texture" id=2]
 [ext_resource path="res://Assets/outlined_man.png" type="Texture" id=3]
 [ext_resource path="res://Assets/floor_tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://Assets/Health_Bar/full_health.png" type="Texture" id=5]
+[ext_resource path="res://Game/Enemy.gd" type="Script" id=6]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player1" type="KinematicBody2D" parent="."]
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+format = 1
+tile_data = PoolIntArray( 65547, 14, 0, 131074, 5, 0, 131075, 12, 0, 131076, 12, 0, 131077, 12, 0, 131078, 12, 0, 131079, 11, 0, 196610, 6, 0, 196611, 13, 0, 196612, 13, 0, 196613, 13, 0, 196614, 13, 0, 196615, 17, 0, 196616, 11, 0, 262146, 7, 0, 262147, 8, 0, 262148, 8, 0, 262149, 8, 0, 262150, 8, 0, 262151, 16, 0, 262152, 17, 0, 262153, 12, 0, 262154, 12, 0, 262155, 12, 0, 262156, 11, 0, 327687, 6, 0, 327688, 13, 0, 327689, 13, 0, 327690, 13, 0, 327691, 13, 0, 327692, 10, 0, 393223, 7, 0, 393224, 8, 0, 393225, 8, 0, 393226, 8, 0, 393227, 8, 0, 393228, 9, 0 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 234.45, 62.75 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="Player1"]
+[node name="Sprite" type="Sprite" parent="Player"]
 position = Vector2( 3.8147e-06, 1.90735e-06 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
-[node name="TorsoCollison" type="CollisionPolygon2D" parent="Player1"]
-polygon = PoolVector2Array( -20.0328, -59.2612, 18.3327, -59.2612, 18.3327, -29.0011, 38.8663, -29.5414, 39.9471, -7.92708, 18.8731, -6.84636, 18.8731, 8.82405, 32.382, 9.36441, 34.0031, 61.2389, 19.4134, 61.2389, -38.405, 63.4003, -19.4924, 11.5258 )
+[node name="TorsoCollison" type="CollisionPolygon2D" parent="Player"]
+polygon = PoolVector2Array( -20.0328, -59.2612, 18.3327, -59.2612, 18.3327, -29.0011, 40.2065, -29.1097, 40.2065, 63.7119, -38.405, 63.4003, -20.0354, 12.9981 )
 
-[node name="Camera2D" type="Camera2D" parent="Player1"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2( 1.02885, 1.11243 )
 current = true
 smoothing_enabled = true
 drag_margin_top = 0.5
 drag_margin_bottom = 0.0
 
-[node name="Health" type="Sprite" parent="Player1"]
-position = Vector2( -100, -100 )
+[node name="EmptyBar" type="Sprite" parent="Player"]
+position = Vector2( 0, -80 )
 texture = ExtResource( 2 )
 
-[node name="Player2" type="KinematicBody2D" parent="."]
+[node name="Health" type="Sprite" parent="Player/EmptyBar"]
+texture = ExtResource( 5 )
+
+[node name="Enemy" type="KinematicBody2D" parent="."]
 position = Vector2( 426.319, 62.6853 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="Player2"]
+[node name="Sprite" type="Sprite" parent="Enemy"]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
-[node name="TorsoCollison2" type="CollisionPolygon2D" parent="Player2"]
-polygon = PoolVector2Array( -20.0328, -59.2612, 18.3327, -59.2612, 18.3327, -29.0011, 38.8663, -29.5414, 39.9471, -7.92708, 18.8731, -6.84636, 18.8731, 8.82405, 32.382, 9.36441, 34.0031, 61.2389, 19.4134, 61.2389, -38.405, 63.4003, -19.4924, 11.5258 )
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 4 )
-format = 1
-tile_data = PoolIntArray( 131074, 5, 0, 131075, 12, 0, 131076, 12, 0, 131077, 12, 0, 131078, 12, 0, 131079, 11, 0, 131083, 14, 0, 196610, 6, 0, 196611, 13, 0, 196612, 13, 0, 196613, 13, 0, 196614, 13, 0, 196615, 17, 0, 196616, 11, 0, 262146, 7, 0, 262147, 8, 0, 262148, 8, 0, 262149, 8, 0, 262150, 8, 0, 262151, 16, 0, 262152, 17, 0, 262153, 12, 0, 262154, 12, 0, 262155, 12, 0, 262156, 11, 0, 327687, 6, 0, 327688, 13, 0, 327689, 13, 0, 327690, 13, 0, 327691, 13, 0, 327692, 10, 0, 393223, 7, 0, 393224, 8, 0, 393225, 8, 0, 393226, 8, 0, 393227, 8, 0, 393228, 9, 0 )
+[node name="TorsoCollison" type="CollisionPolygon2D" parent="Enemy"]
+polygon = PoolVector2Array( -20.0328, -59.2612, 18.3327, -59.2612, 18.3327, -29.0011, 40.2065, -29.1097, 40.2065, 63.7119, -38.405, 63.4003, -20.0354, 12.9981 )
