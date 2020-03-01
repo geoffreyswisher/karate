@@ -1,9 +1,12 @@
+# wait until animation is finished:  https://godotengine.org/qa/12131/wait-until-animation-is-finished
+
+
 extends KinematicBody2D
+
 
 var speed = 300
 var jumpspeed = -800
 var gravity = 1500
-
 var velocity = Vector2()
 
 var Health = load("res://Game/Health.gd")
@@ -11,11 +14,13 @@ var health = Health.new()
 
 var hitmarker = preload("res://Game/HitMarker.tscn")
 
+var e = 2
+var p = 1
+
 func _ready():
-	print(health.player_health)
+	pass
 
 func get_input():
-
 	velocity.x = 0
 
 	if Input.is_action_pressed("ui_right"):
@@ -30,26 +35,18 @@ func get_input():
 	if Input.is_action_just_pressed("game_x"):
 		if check_in_range():
 			if subtract_enemy_health(5) > 0:
-				display_hit_marker()
+				display_hit_marker(e)
 		print('kick')
 
 	if Input.is_action_just_pressed("game_z"):
 		if check_in_range():
 			if subtract_enemy_health(5) > 0:
-				display_hit_marker()
+				display_hit_marker(e)
 		print('punch')
 
 
-func _physics_process(delta):
-	
-	get_input()
-	
-	velocity.y += gravity * delta
-	velocity = move_and_slide(velocity, Vector2(0,-1))
-
-
 func get_enemy_position():
-	var enemy = self.owner.get_child(2)
+	var enemy = self.owner.get_child(e)
 	if enemy:
 		var enemy_pos = enemy.position
 		return enemy_pos
@@ -71,16 +68,30 @@ func check_in_range():
 
 func subtract_enemy_health(factor):
 	health.enemy_health -= factor
-	print(health.enemy_health)
 	
 	if health.enemy_health <= 0:
-		var enemy = self.owner.get_child(2)
+		var enemy = self.owner.get_child(e)
 		self.owner.remove_child(enemy)
 	return health.enemy_health
 
 
-func display_hit_marker():
-	var enemy = self.owner.get_child(2)
+func subtract_player_health(factor):
+	health.player_health -= factor
+	
+	if health.player_health <= 0:
+		print("Game Over")
+		get_tree().quit() # replace with game over screen
+
+
+func display_hit_marker(node):
+	var enemy = self.owner.get_child(node)
 	var instance = hitmarker.instance()
 	enemy.add_child(instance)
+
+
+func _physics_process(delta):
 	
+	get_input()
+	
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2(0,-1))

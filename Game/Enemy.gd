@@ -4,6 +4,10 @@ var velocity = Vector2()
 var speed = 150
 var delay = 100
 var player_positions = []
+var hit_delay = 50  # replace with wait for animation
+
+var p = 1
+var e = 2
 
 func _ready():
 	pass 
@@ -41,8 +45,28 @@ func movement(player_pos):
 	
 	velocity.x = speed * xdirection
 
-func _process(delta):
-	var player_pos = self.owner.get_child(1).position
+
+func get_player_collisions():
+	
+	for slide in get_slide_count():
+		var collision = get_slide_collision(slide)
+		
+		if collision.collider.name == "Player":
+			if hit_delay == 50:
+				self.owner.get_child(p).subtract_player_health(10)
+				self.owner.get_child(p).display_hit_marker(p)
+				hit_delay = 0
+			else:
+				hit_delay += 1
+			return true
+			
+	return false
+
+
+func _physics_process(delta):
+	var player_pos = self.owner.get_child(p).position
 	movement(player_pos)
 	
 	move_and_slide(velocity, Vector2(0,-1))
+	
+	get_player_collisions()
