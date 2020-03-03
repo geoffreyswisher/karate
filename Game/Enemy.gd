@@ -6,8 +6,8 @@ var delay = 100
 var player_positions = []
 var hit_delay = 50  # replace with wait for animation
 
-var p = 1
-var e = 2
+var p = "../Player"
+var e = "../Enemy"
 
 func _ready():
 	pass 
@@ -53,8 +53,8 @@ func get_player_collisions():
 		
 		if collision.collider.name == "Player":
 			if hit_delay == 50:
-				self.owner.get_child(p).subtract_player_health(10)
-				self.owner.get_child(p).display_hit_marker(p)
+				get_node(p).subtract_player_health(10)
+				get_node(p).display_hit_marker(p)
 				hit_delay = 0
 			else:
 				hit_delay += 1
@@ -64,7 +64,7 @@ func get_player_collisions():
 
 
 func _physics_process(delta):
-	var player_pos = self.owner.get_child(p).position
+	var player_pos = get_node(p).position
 	movement(player_pos)
 	
 	move_and_slide(velocity, Vector2(0,-1))

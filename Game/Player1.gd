@@ -14,8 +14,8 @@ var health = Health.new()
 
 var hitmarker = preload("res://Game/HitMarker.tscn")
 
-var e = 2
-var p = 1
+var e = "../Enemy"
+var p = "../Player"
 
 func _ready():
 	pass
@@ -46,7 +46,7 @@ func get_input():
 
 
 func get_enemy_position():
-	var enemy = self.owner.get_child(e)
+	var enemy = get_node(e)
 	if enemy:
 		var enemy_pos = enemy.position
 		return enemy_pos
@@ -70,7 +70,7 @@ func subtract_enemy_health(factor):
 	health.enemy_health -= factor
 	
 	if health.enemy_health <= 0:
-		var enemy = self.owner.get_child(e)
+		var enemy = get_node(e)
 		self.owner.remove_child(enemy)
 	return health.enemy_health
 
@@ -84,7 +84,7 @@ func subtract_player_health(factor):
 
 
 func display_hit_marker(node):
-	var enemy = self.owner.get_child(node)
+	var enemy = get_node(node)
 	var instance = hitmarker.instance()
 	enemy.add_child(instance)
 
