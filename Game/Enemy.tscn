@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Assets/outlined_man.png" type="Texture" id=2]
+
+[node name="Enemy" type="KinematicBody2D"]
+position = Vector2( 426.319, 62.6853 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="TorsoCollison" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -20.0328, -59.2612, 18.3327, -59.2612, 18.3327, -29.0011, 40.2065, -29.1097, 40.2065, 63.7119, -38.405, 63.4003, -20.0354, 12.9981 )

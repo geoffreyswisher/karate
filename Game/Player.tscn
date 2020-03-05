@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game/Player1.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Health_Bar/empty_health_bar.png" type="Texture" id=2]
+[ext_resource path="res://Assets/outlined_man.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Health_Bar/full_health.png" type="Texture" id=4]
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 234.45, 62.75 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 3.8147e-06, 1.90735e-06 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="TorsoCollison" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -20.0328, -59.2612, 18.3327, -59.2612, 18.3327, -29.0011, 40.2065, -29.1097, 40.2065, 63.7119, -38.405, 63.4003, -20.0354, 12.9981 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2( 1.02885, 1.11243 )
+current = true
+zoom = Vector2( 1.2, 1.2 )
+smoothing_enabled = true
+smoothing_speed = 3.0
+offset_v = -0.5
+drag_margin_top = 1.0
+drag_margin_bottom = 0.0
+
+[node name="EmptyBar" type="Sprite" parent="."]
+position = Vector2( 0, -80 )
+texture = ExtResource( 2 )
+
+[node name="Health" type="Sprite" parent="EmptyBar"]
+texture = ExtResource( 4 )
