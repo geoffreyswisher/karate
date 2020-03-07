@@ -6,13 +6,20 @@ var gravity = 1500
 var jumpspeed = -800
 var delay = 100
 var player_positions = []
-var hit_delay = 50  # replace with wait for animation
+var hit_delay = 60  # replace with wait for animation
 
-var p = "../Player"
+var p = "Player"
 var e = "../Enemy"
 
+var Health = load("res://Game/Health.gd")
+var health = Health.new()
+var max_health = health.enemy_health
+
+onready var animation = $Animations
+
 func _ready():
-	pass 
+	health.initialize(get_tree().get_current_scene().get_name())
+	print(health.enemy_health)
 
 
 # movement of the enemy to the player with a semi-fluid delay
@@ -42,10 +49,17 @@ func movement(player_pos):
 	
 	# determine x direction from average position 
 	var xdisplacement = avg.x - position.x
+	var ydisplacement = avg.y - position.y
 	var xdirection = int(xdisplacement / abs(xdisplacement))
 
+	if abs(xdisplacement) < 500 and abs(ydisplacement) < 300: 
+		velocity.x = speed * xdirection
+		
+		if avg.y < self.position.y:
+			jump()
 	
-	velocity.x = speed * xdirection
+	
+	
 
 
 func get_player_collisions():
@@ -53,35 +67,52 @@ func get_player_collisions():
 		var collision = get_slide_collision(slide)
 		
 		if collision.collider.name == "Player":
-			if hit_delay == 50:
-				get_node(p).subtract_player_health(10)
-				get_node(p).display_hit_marker(p)
+			if hit_delay == 60:
+				owner.get_node(p).subtract_player_health(5)
+				owner.get_node(p).display_hit_marker(p)
 				hit_delay = 0
-				
 				
 			else:
 				hit_delay += 1
 				
 			return true
-		else:
-			jump()
+
 	return false
 
 
 func jump():
-	velocity.y = 0
+	#velocity.y = 0
 	if is_on_floor():
-		
-		velocity.y = jumpspeed
+		velocity.y += jumpspeed
 
+
+func subtract_own_health(factor):
+	health.enemy_health -= factor
+	var healthbar = $Health
+	healthbar.update_healthbar(health.enemy_health)
+	return health.enemy_health
+
+
+func animations():
+	if velocity.x > 0:
+		animation.flip_h = false
+		animation.play("Walk")
+	if velocity.x < 0:
+		animation.flip_h = true
+		animation.play("Walk")
+
+func check_position():
+	if position.y > 2000:
+		self.get_parent().remove_child(self)
 
 func _physics_process(delta):
-	var player_pos = get_node(p).position
+	var player_pos = owner.get_node(p).position
 	movement(player_pos)
 	
+	velocity.y += gravity * delta
 	
-	move_and_slide(velocity, Vector2(0,-1))
+	velocity = move_and_slide(velocity, Vector2(0,-1))
+	get_player_collisions()
+	animations()
 	
-	if !(get_player_collisions()):
-		velocity.y += gravity * delta
-		print(velocity.y)
+	check_position()

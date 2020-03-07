@@ -1,18 +1,62 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Game/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://Assets/outlined_man.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enemy/Walk/2-5.png" type="Texture" id=2]
+[ext_resource path="res://Game/Health_Bar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Enemy/Walk/2-1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Enemy/Walk/2-8.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Enemy/Walk/2-4.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Enemy/Kick/1-1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Enemy/Walk/2-2.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Enemy/Punch/4-3.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Enemy/Walk/2-7.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Enemy/Punch/4-5.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Enemy/Punch/4-2.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Enemy/Punch/4-4.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Enemy/Kick/1-4.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Enemy/Kick/1-0.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Enemy/Walk/2-3.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Enemy/Walk/2-6.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Enemy/Punch/4-6.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Enemy/Kick/1-2.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Enemy/Kick/1-3.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Enemy/Kick/1-5.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Enemy/Kick/1-6.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Enemy/Kick/1-7.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Enemy/Punch/4-1.png" type="Texture" id=24]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 24 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "Punch",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 7 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 14 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ) ],
+"loop": false,
+"name": "Kick",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 8 ), ExtResource( 16 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 17 ), ExtResource( 10 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 10.0
+} ]
 
 [node name="Enemy" type="KinematicBody2D"]
-position = Vector2( 426.319, 62.6853 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
+[node name="Animations" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.125, 0.125 )
+frames = SubResource( 1 )
 
 [node name="TorsoCollison" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -20.0328, -59.2612, 18.3327, -59.2612, 18.3327, -29.0011, 40.2065, -29.1097, 40.2065, 63.7119, -38.405, 63.4003, -20.0354, 12.9981 )
+polygon = PoolVector2Array( -26.1682, -59.2702, 22.0867, -59.2702, 21.472, -29.4566, 40.2065, -29.1097, 40.2065, 63.7119, -26.319, 65.3147, -26.319, 17.3147 )
+
+[node name="Health" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -80 )

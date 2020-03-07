@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://MainMenu/Scripts/Button_Manager.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/MontserrantItalic_64.tres" type="DynamicFont" id=2]
-[ext_resource path="res://MainMenu/Buttons/ContinueButton.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Game/MainScene.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Fonts/Montserrant_48.tres" type="DynamicFont" id=3]
 [ext_resource path="res://MainMenu/Buttons/BackButton.tscn" type="PackedScene" id=5]
 
 [node name="Continue" type="Control"]
@@ -15,13 +14,17 @@ __meta__ = {
 }
 
 [node name="Menu" type="VBoxContainer" parent="."]
-margin_left = 100.0
-margin_top = 60.0
+margin_left = 20.0
+margin_top = 20.0
 margin_right = 924.0
 margin_bottom = 540.0
+rect_scale = Vector2( 0.9, 0.9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="Menu"]
-margin_right = 824.0
+margin_right = 904.0
 margin_bottom = 79.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0.392157, 1, 1 )
@@ -29,17 +32,28 @@ custom_constants/shadow_offset_y = 5
 text = "Instructions"
 align = 1
 
-[node name="Buttons" type="VBoxContainer" parent="Menu"]
+[node name="Text" type="VBoxContainer" parent="Menu"]
 margin_top = 83.0
-margin_right = 824.0
-margin_bottom = 143.0
+margin_right = 904.0
+margin_bottom = 521.0
 size_flags_horizontal = 3
 
-[node name="ContinueButton" parent="Menu/Buttons" instance=ExtResource( 3 )]
-margin_bottom = 60.0
-scene_to_load = ExtResource( 4 )
+[node name="Label" type="Label" parent="Menu/Text"]
+margin_right = 904.0
+margin_bottom = 438.0
+custom_fonts/font = ExtResource( 3 )
+text = "Jim is an employee at a karate
+company where all promotions
+are decided by karate battles.
+Use the arrow keys to move,
+up arrow key to jump,
+and the \"z\" and \"x\" key to punch
+and kick, respectively."
 
 [node name="BackButton" parent="Menu" instance=ExtResource( 5 )]
-margin_top = 147.0
-margin_bottom = 207.0
+margin_top = 525.0
+margin_right = 904.0
+margin_bottom = 585.0
+
+[node name="Buttons" type="Node" parent="Menu"]
 [connection signal="pressed" from="Menu/BackButton" to="." method="_on_BackButton_pressed"]

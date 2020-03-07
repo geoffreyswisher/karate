@@ -1,8 +1,12 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Grass/grass.png" type="Texture" id=1]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Grass/cloud.png" type="Texture" id=3]
+[ext_resource path="res://Game/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/Door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Grass/tree.png" type="Texture" id=6]
+[ext_resource path="res://Game/Grass/Grass_Level.gd" type="Script" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -196,17 +200,30 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 } ]
 9/z_index = 0
 
-[node name="Root" type="Node2D"]
+[node name="Grass_Level" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="Grass_tiles" type="TileMap" parent="."]
 tile_set = SubResource( 11 )
 format = 1
-tile_data = PoolIntArray( 65546, 9, 0, 131077, 9, 0, 262149, 0, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 2, 0, 327685, 3, 0, 327686, 4, 0, 327687, 4, 0, 327688, 4, 0, 327689, 4, 0, 327690, 5, 0, 393221, 3, 0, 393222, 4, 0, 393223, 4, 0, 393224, 4, 0, 393225, 4, 0, 393226, 5, 0, 458757, 6, 0, 458758, 7, 0, 458759, 7, 0, 458760, 7, 0, 458761, 7, 0, 458762, 8, 0 )
+tile_data = PoolIntArray( -262072, 0, 0, -262071, 1, 0, -262070, 2, 0, -196605, 0, 0, -196604, 2, 0, -196536, 6, 0, -196535, 7, 0, -196534, 8, 0, -131069, 3, 0, -131068, 5, 0, -65533, 3, 0, -65532, 5, 0, -65504, 0, 0, -65503, 1, 0, -65502, 1, 0, -65501, 1, 0, -65500, 1, 0, -65499, 1, 0, -65498, 1, 0, -65497, 1, 0, -65496, 1, 0, -65495, 1, 0, -65494, 1, 0, -65493, 1, 0, -65492, 1, 0, -65491, 2, 0, -65487, 9, 0, -65483, 9, 0, -65476, 0, 0, -65475, 1, 0, -65474, 1, 0, -65473, 1, 0, -65472, 1, 0, -65471, 1, 0, -65470, 1, 0, -65469, 1, 0, -65468, 2, 0, 3, 3, 0, 4, 5, 0, 28, 9, 0, 32, 6, 0, 33, 7, 0, 34, 7, 0, 35, 7, 0, 36, 7, 0, 37, 7, 0, 38, 7, 0, 39, 7, 0, 40, 7, 0, 41, 7, 0, 42, 7, 0, 43, 7, 0, 44, 7, 0, 45, 8, 0, 60, 6, 0, 61, 7, 0, 62, 4, 0, 63, 4, 0, 64, 4, 0, 65, 4, 0, 66, 4, 0, 67, 7, 0, 68, 8, 0, 65539, 3, 0, 65540, 5, 0, 65546, 9, 0, 65593, 9, 0, 65598, 6, 0, 65599, 7, 0, 65600, 7, 0, 65601, 7, 0, 65602, 8, 0, 131075, 3, 0, 131076, 4, 0, 131077, 2, 0, 131098, 9, 0, 196611, 3, 0, 196612, 4, 0, 196613, 5, 0, 196623, 0, 0, 196624, 2, 0, 262147, 3, 0, 262148, 4, 0, 262149, 4, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 262157, 1, 0, 262158, 1, 0, 262159, 4, 0, 262160, 5, 0, 327683, 3, 0, 327684, 4, 0, 327685, 4, 0, 327686, 4, 0, 327687, 4, 0, 327688, 4, 0, 327689, 4, 0, 327690, 4, 0, 327691, 4, 0, 327692, 4, 0, 327693, 4, 0, 327694, 4, 0, 327695, 4, 0, 327696, 4, 0, 327697, 1, 0, 327698, 1, 0, 327699, 1, 0, 327700, 1, 0, 327701, 1, 0, 327702, 1, 0, 327703, 1, 0, 327704, 2, 0, 393219, 3, 0, 393220, 4, 0, 393221, 4, 0, 393222, 4, 0, 393223, 4, 0, 393224, 4, 0, 393225, 4, 0, 393226, 4, 0, 393227, 4, 0, 393228, 4, 0, 393229, 4, 0, 393230, 4, 0, 393231, 4, 0, 393232, 4, 0, 393233, 4, 0, 393234, 4, 0, 393235, 4, 0, 393236, 4, 0, 393237, 4, 0, 393238, 4, 0, 393239, 4, 0, 393240, 5, 0, 458755, 6, 0, 458756, 7, 0, 458757, 4, 0, 458758, 7, 0, 458759, 7, 0, 458760, 7, 0, 458761, 7, 0, 458762, 7, 0, 458763, 7, 0, 458764, 7, 0, 458765, 7, 0, 458766, 7, 0, 458767, 7, 0, 458768, 7, 0, 458769, 7, 0, 458770, 7, 0, 458771, 7, 0, 458772, 7, 0, 458773, 7, 0, 458774, 7, 0, 458775, 7, 0, 458776, 8, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 530, 190 )
+position = Vector2( 464, 192 )
 
 [node name="Enemies" type="Node" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 832, 192 )
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1424, 256 )
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 2752, -128 )
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 4336, -128 )
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -214,17 +231,17 @@ position = Vector2( 530, 190 )
 z_index = -2
 
 [node name="Cloud" type="Sprite" parent="Background/Clouds"]
-position = Vector2( 330, -110 )
+position = Vector2( 336, -112 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
 
 [node name="Cloud2" type="Sprite" parent="Background/Clouds"]
-position = Vector2( 550, -50 )
+position = Vector2( 560, -48 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
 
 [node name="Cloud3" type="Sprite" parent="Background/Clouds"]
-position = Vector2( 810, -150 )
+position = Vector2( 800, -144 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
 
@@ -234,11 +251,122 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
 
 [node name="Cloud5" type="Sprite" parent="Background/Clouds"]
-position = Vector2( 550, -280 )
+position = Vector2( 560, -272 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
 
 [node name="Cloud6" type="Sprite" parent="Background/Clouds"]
-position = Vector2( 110, -200 )
+position = Vector2( 112, -208 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
+
+[node name="Cloud7" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 1424, -304 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud8" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 2048, -288 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud9" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 1712, -256 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud10" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 2336, -384 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud11" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 2624, -416 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud12" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 2960, -432 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud13" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 3344, -368 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud14" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 3792, -352 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud15" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 3360, 336 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud16" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 3152, -272 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud17" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 2688, -608 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud18" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 2144, -544 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud19" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 1776, -560 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud20" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 2000, 224 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud21" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 3680, -560 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud22" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 4208, -592 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud23" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 4864, -592 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Cloud24" type="Sprite" parent="Background/Clouds"]
+position = Vector2( 4512, -496 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Trees" type="Node2D" parent="Background"]
+z_index = -1
+
+[node name="Tree" type="Sprite" parent="Background/Trees"]
+position = Vector2( 1216, 208 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="Tree2" type="Sprite" parent="Background/Trees"]
+position = Vector2( 2304, -176 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="Tree3" type="Sprite" parent="Background/Trees"]
+position = Vector2( 4112, -176 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="Door" parent="." instance=ExtResource( 5 )]
+position = Vector2( 4768, -304 )
